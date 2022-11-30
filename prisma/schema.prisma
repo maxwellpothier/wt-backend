@@ -9,3 +9,34 @@ datasource db {
     provider = "postgresql"
     url      = env("DATABASE_URL")
 }
+
+model User {
+    id        String   @id @default(uuid())
+    createdAt DateTime @default(now())
+
+    username String @unique
+    password String
+    posts    Post[]
+}
+
+model Album {
+    id String @id @default(uuid())
+
+    title        String
+    artist       String
+    yearReleased Int
+    url          String
+
+    posts Post[]
+}
+
+model Post {
+    id        String   @id @default(uuid())
+    createdAt DateTime @default(now())
+
+    content     String
+    belongsToId String
+    belongsTo   User   @relation(fields: [belongsToId], references: [id])
+    album       Album  @relation(fields: [albumId], references: [id])
+    albumId     String
+}
