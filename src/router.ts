@@ -1,15 +1,16 @@
 import {Router} from "express";
+import { createPost, deletePost, editPost, getAllPosts, getUserPosts } from "./handlers/post";
 
 const router = Router();
 
 /**
  * POSTS
  */
-router.get("/posts", () => {});
-router.get("/posts/:userid", () => {});
-router.post("/posts/:userid", () => {});
-router.put("/posts/:userid/:id", () => {});
-router.delete("/posts/:userid/:id", () => {});
+router.get("/posts", getAllPosts);
+router.get("/posts/:userid", getUserPosts);
+router.post("/posts/:userid", createPost);
+router.put("/posts/:userid/:id", editPost);
+router.delete("/posts/:userid/:id", deletePost);
 
 /**
  * ALBUMS
@@ -17,3 +18,5 @@ router.delete("/posts/:userid/:id", () => {});
 router.get("/albums", () => {});
 router.get("/albums/:id", () => {});
 router.post("/albums", () => {});
+
+export default router;
