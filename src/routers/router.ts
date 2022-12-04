@@ -9,6 +9,7 @@ const router = Router();
 const inputValidators = {
 	post: [
 		body("content").isString(),
+		body("rating").isFloat(),
 		handleInputErrors
 	],
 	album: [

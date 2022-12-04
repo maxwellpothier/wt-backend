@@ -35,6 +35,7 @@ model Post {
     createdAt DateTime @default(now())
 
     content     String
+    rating      Float
     belongsToId String
     belongsTo   User   @relation(fields: [belongsToId], references: [id])
     album       Album  @relation(fields: [albumId], references: [id])
