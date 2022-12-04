@@ -1,7 +1,7 @@
 import express from "express";
 import router from "./router";
 import morgan from "morgan";
-import { protectDataCalls } from "./utils/authUtils";
+import { protectDataCalls } from "./utils/middlewareUtils";
 
 const app = express();
 app.use(morgan("dev"));
