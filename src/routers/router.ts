@@ -7,7 +7,13 @@ import { addAlbum, getAlbumById, getAlbums } from "../handlers/album";
 const router = Router();
 
 const inputValidators = {
-	post: [
+	createPost: [
+		body("content").isString(),
+		body("rating").isFloat(),
+		body("albumId").isString(),
+		handleInputErrors
+	],
+	editPost: [
 		body("content").isString(),
 		body("rating").isFloat(),
 		handleInputErrors
@@ -26,8 +32,8 @@ const inputValidators = {
  */
 router.get("/posts", getAllPosts);
 router.get("/posts/:userid", getUserPosts);
-router.post("/posts/:userid", inputValidators.post, createPost);
-router.put("/posts/:userid/:id", inputValidators.post, editPost);
+router.post("/posts/:userid", inputValidators.createPost, createPost);
+router.put("/posts/:userid/:id", inputValidators.editPost, editPost);
 router.delete("/posts/:userid/:id", deletePost);
 
 /**

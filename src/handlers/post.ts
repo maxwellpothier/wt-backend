@@ -1,24 +1,67 @@
-export const getAllPosts = (req, res) => {
-	res.status(200);
-	res.json({message: "Here's all the posts!"});
+import prisma from "../db";
+
+export const getAllPosts = async (req, res) => {
+	const posts = await prisma.post.findMany({
+		include: {
+			album: true,
+		},
+	});
+
+	res.json({data: posts});
 };
 
-export const getUserPosts = (req, res) => {
-	res.status(200);
-	res.json({message: `Here's all the posts from ${req.params.userid}!`});
+export const getUserPosts = async (req, res) => {
+	const posts = await prisma.post.findMany({
+		where: {
+			belongsToId: req.params.userid,
+		},
+		include: {
+			album: true,
+		},
+	});
+
+	res.json({data: posts});
 };
 
-export const createPost = (req, res) => {
-	res.status(200);
-	res.json({message: `Create new post for user ${req.user.id} that says ${req.body.content} rated ${req.body.rating}`});
+export const createPost = async (req, res) => {
+	const post = await prisma.post.create({
+		data: {
+			content: req.body.content,
+			rating: req.body.rating,
+			belongsToId: req.user.id,
+			albumId: req.body.albumId
+		},
+	});
+
+	res.json({data: post});
 };
 
-export const editPost = (req, res) => {
-	res.status(200);
-	res.json({message: `Edit post ${req.params.id} for user ${req.user.id} that says ${req.body.content} rated ${req.body.rating}`});
+export const editPost = async (req, res) => {
+	const edited = await prisma.post.update({
+		where: {
+			id_belongsToId: {
+				id: req.params.id,
+				belongsToId: req.user.id,
+			},
+		},
+		data: {
+			content: req.body.content,
+			rating: req.body.rating,
+		}
+	});
+
+	res.json({data: edited});
 };
 
-export const deletePost = (req, res) => {
-	res.status(200);
-	res.json({message: `Delete post ${req.params.id} for user ${req.user.id}`});
+export const deletePost = async (req, res) => {
+	const deleted = await prisma.post.delete({
+		where: {
+			id_belongsToId: {
+				id: req.params.id,
+				belongsToId: req.user.id,
+			},
+		},
+	});
+
+	res.json({data: deleted});
 };

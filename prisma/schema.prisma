@@ -40,4 +40,6 @@ model Post {
     belongsTo   User   @relation(fields: [belongsToId], references: [id])
     album       Album  @relation(fields: [albumId], references: [id])
     albumId     String
+
+    @@unique([id, belongsToId])
 }
