@@ -1,5 +1,5 @@
 import {Router} from "express";
-import { createPost, deletePost, editPost, getAllPosts, getUserPosts } from "../handlers/post";
+import { createPost, deletePost, editPost, getAllPosts, getOnePost, getUserPosts } from "../handlers/post";
 import {body} from "express-validator";
 import { handleInputErrors, onlyAdmin } from "../utils/middlewareUtils";
 import { addAlbum, getAlbumById, getAlbums } from "../handlers/album";
@@ -32,6 +32,7 @@ const inputValidators = {
  */
 router.get("/posts", getAllPosts);
 router.get("/posts/:userid", getUserPosts);
+router.get("/posts/:userid/:id", getOnePost);
 router.post("/posts/:userid", inputValidators.createPost, createPost);
 router.put("/posts/:userid/:id", inputValidators.editPost, editPost);
 router.delete("/posts/:userid/:id", deletePost);

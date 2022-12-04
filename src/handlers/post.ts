@@ -23,6 +23,22 @@ export const getUserPosts = async (req, res) => {
 	res.json({data: posts});
 };
 
+export const getOnePost = async (req, res) => {
+	const post = await prisma.post.findUnique({
+		where: {
+			id_belongsToId: {
+				id: req.params.id,
+				belongsToId: req.params.userid,
+			},
+		},
+		include: {
+			album: true,
+		},
+	});
+
+	res.json({data: post});
+};
+
 export const createPost = async (req, res) => {
 	const post = await prisma.post.create({
 		data: {
