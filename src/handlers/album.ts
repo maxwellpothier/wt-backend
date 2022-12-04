@@ -1,13 +1,26 @@
 import prisma from "../db";
 
-export const getAlbums = (req, res) => {
-	res.status(200);
-	res.json({message: "Here's all the albums!"});
+export const getAlbums = async (req, res) => {
+	const albums = await prisma.album.findMany({
+		include: {
+			posts: true,
+		},
+	});
+
+	res.json({data: albums});
 };
 
-export const getAlbumById = (req, res) => {
-	res.status(200);
-	res.json({message: `Here's the album under id: ${req.params.id}`});
+export const getAlbumById = async (req, res) => {
+	const album = await prisma.album.findUnique({
+		where: {
+			id: req.params.id
+		},
+		include: {
+			posts: true,
+		},
+	});
+	
+	res.json({data: album});
 };
 
 export const addAlbum = async (req, res) => {
