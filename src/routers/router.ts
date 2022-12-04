@@ -14,7 +14,7 @@ const inputValidators = {
 	album: [
 		body("title").isString(),
 		body("artist").isString(),
-		body("yearReleased").isString(),
+		body("yearReleased").isInt(),
 		body("url").isString(),
 		handleInputErrors
 	],

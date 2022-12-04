@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { validationResult } from "express-validator";
+import { userInfo } from "os";
 
 export const protectDataCalls = (req, res, next) => {
 	const bearer = req.headers.authorization;
@@ -32,9 +33,13 @@ export const protectDataCalls = (req, res, next) => {
 };
 
 export const onlyAdmin = (req, res, next) => {
-	const bearer = req.headers.authorization;
-
-	console.log(bearer);
+	if (req.user.id === process.env.ADMIN_USER_ID) {
+		next();
+	} else {
+		res.status(401);
+		res.json({message: "Only admin can access this route"});
+		return;
+	}
 };
 
 export const handleInputErrors = (req, res, next) => {
