@@ -1,7 +1,8 @@
 import {Router} from "express";
 import { createPost, deletePost, editPost, getAllPosts, getUserPosts } from "../handlers/post";
 import {body} from "express-validator";
-import { handleInputErrors } from "../utils/middlewareUtils";
+import { handleInputErrors, onlyAdmin } from "../utils/middlewareUtils";
+import { addAlbum, getAlbumById, getAlbums } from "../handlers/album";
 
 const router = Router();
 
@@ -31,8 +32,8 @@ router.delete("/posts/:userid/:id", deletePost);
 /**
  * ALBUMS
  */
-router.get("/albums", () => {});
-router.get("/albums/:id", () => {});
-router.post("/albums", inputValidators.album, () => {});
+router.get("/albums", getAlbums);
+router.get("/albums/:id", getAlbumById);
+router.post("/albums", inputValidators.album, onlyAdmin, addAlbum);
 
 export default router;

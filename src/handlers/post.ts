@@ -10,15 +10,15 @@ export const getUserPosts = (req, res) => {
 
 export const createPost = (req, res) => {
 	res.status(200);
-	res.json({message: `Create new post for user ${req.params.userid}`});
+	res.json({message: `Create new post for user ${req.user.id} that says ${req.body.content}`});
 };
 
 export const editPost = (req, res) => {
 	res.status(200);
-	res.json({message: `Edit post ${req.params.id} for user ${req.params.userid}`});
+	res.json({message: `Edit post ${req.params.id} for user ${req.user.id} that says ${req.body.content}`});
 };
 
 export const deletePost = (req, res) => {
 	res.status(200);
-	res.json({message: `Delete post ${req.params.id} for user ${req.params.userid}`});
+	res.json({message: `Delete post ${req.params.id} for user ${req.user.id}`});
 };

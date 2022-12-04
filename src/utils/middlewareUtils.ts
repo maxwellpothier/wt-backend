@@ -31,6 +31,12 @@ export const protectDataCalls = (req, res, next) => {
 	}
 };
 
+export const onlyAdmin = (req, res, next) => {
+	const bearer = req.headers.authorization;
+
+	console.log(bearer);
+};
+
 export const handleInputErrors = (req, res, next) => {
 	const errors = validationResult(req);
 
