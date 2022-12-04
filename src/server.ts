@@ -9,12 +9,6 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-// Custom middleware
-app.use((req, res, next) => {
-	req.middlewareMessage = "Secret from middleware";
-	next();
-});
-
 app.get("/", (req, res) => {
 	console.log("Hello from express");
 	res.status(200);

@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { validationResult } from "express-validator";
 
 export const protectDataCalls = (req, res, next) => {
 	const bearer = req.headers.authorization;
@@ -27,5 +28,16 @@ export const protectDataCalls = (req, res, next) => {
 			message: "Invalid auth token",
 			error: err
 		});
+	}
+};
+
+export const handleInputErrors = (req, res, next) => {
+	const errors = validationResult(req);
+
+	if (!errors.isEmpty()) {
+		res.status(400);
+		res.json({errors: errors.array()});
+	} else {
+		next();
 	}
 };
