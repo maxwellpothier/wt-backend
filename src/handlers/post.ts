@@ -1,5 +1,6 @@
 import prisma from "../db";
 
+// TODO: add try/catch for error handling so the server doesn't break
 export const getAllPosts = async (req, res) => {
 	const posts = await prisma.post.findMany({
 		include: {
