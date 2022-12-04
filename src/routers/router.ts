@@ -1,5 +1,5 @@
 import {Router} from "express";
-import { createPost, deletePost, editPost, getAllPosts, getUserPosts } from "./handlers/post";
+import { createPost, deletePost, editPost, getAllPosts, getUserPosts } from "../handlers/post";
 
 const router = Router();
 

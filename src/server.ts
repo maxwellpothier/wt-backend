@@ -1,5 +1,6 @@
 import express from "express";
-import router from "./router";
+import router from "./routers/router";
+import identityRouter from "./routers/identityRouter";
 import morgan from "morgan";
 import { protectDataCalls } from "./utils/middlewareUtils";
 
@@ -21,5 +22,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api", protectDataCalls, router);
+app.use("/identity", identityRouter);
 
 export default app;
