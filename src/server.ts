@@ -9,11 +9,10 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.get("/", (req, res) => {
-	throw new Error("Hello");
-	// console.log("Hello from express");
-	// res.status(200);
-	// res.json({message: "Message from the api", secondMessage: req.middlewareMessage});
+app.get("/", (req, res, next) => {
+	console.log("Hello from express");
+	res.status(200);
+	res.json({message: "Message from the api", secondMessage: req.middlewareMessage});
 });
 
 app.use("/api", protectDataCalls, router);
@@ -21,8 +20,13 @@ app.use("/identity", identityRouter);
 
 // Error handler
 app.use((err, req, res, next) => {
-	console.log(err);
-	res.json({message: "Something went wrong"});
+	if (err.type === "auth") {
+		res.status(401).json({message: err.message});
+	} else if (err.type === "input") {
+		res.status(400).json({message: err.message});
+	} else {
+		res.status(500).json({message: "Internal server error"});
+	}
 });
 
 export default app;
