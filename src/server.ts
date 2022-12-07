@@ -25,7 +25,7 @@ app.use((err, req, res, next) => {
 	} else if (err.type === "input") {
 		res.status(400).json({message: err.message});
 	} else {
-		res.status(500).json({message: "Internal server error"});
+		res.status(500).json({message: err.message});
 	}
 });
 

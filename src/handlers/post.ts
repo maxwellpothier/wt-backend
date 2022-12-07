@@ -1,6 +1,5 @@
 import prisma from "../db";
 
-// TODO: add try/catch for error handling so the server doesn't break
 export const getAllPosts = async (req, res, next) => {
 	try {
 		const posts = await prisma.post.findMany({
@@ -74,7 +73,7 @@ export const createPost = async (req, res, next) => {
 	
 		res.json({data: post});
 	} catch (err) {
-		err.message = `Error creating post with rating ${req.body.rating}`;
+		err.message = `Error creating post}`;
 		next(err);
 	}
 };
