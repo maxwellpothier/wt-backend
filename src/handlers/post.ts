@@ -6,6 +6,12 @@ export const getAllPosts = async (req, res, next) => {
 		const posts = await prisma.post.findMany({
 			include: {
 				album: true,
+				belongsTo: {
+					select: {
+						id: true,
+						username: true,
+					}
+				},
 			},
 		});
 	
