@@ -11,7 +11,7 @@ export const createNewUser = async (req, res, next) => {
 		});
 	
 		const token = createJWT(user);
-		res.json({token});
+		res.json({token, user});
 	} catch (err) {
 		err.type = "input";
 		err.message = "Username is already taken";
@@ -41,5 +41,5 @@ export const login = async (req, res) => {
 	}
 
 	const token = createJWT(user);
-	res.json({token});
+	res.json({token, user});
 };
