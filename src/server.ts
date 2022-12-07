@@ -2,9 +2,11 @@ import express from "express";
 import router from "./routers/router";
 import identityRouter from "./routers/identityRouter";
 import morgan from "morgan";
+import cors from "cors";
 import { protectDataCalls } from "./utils/middlewareUtils";
 
 const app = express();
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
