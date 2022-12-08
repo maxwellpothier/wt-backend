@@ -1,7 +1,7 @@
 import {Router} from "express";
 import { body } from "express-validator";
-import { handleInputErrors } from "../utils/middlewareUtils";
-import { createNewUser, login } from "../handlers/user";
+import { handleInputErrors, protectDataCalls } from "../utils/middlewareUtils";
+import { createNewUser, login, getCurrUser } from "../handlers/user";
 
 const identityRouter = Router();
 
@@ -18,6 +18,7 @@ const inputValidators = {
 	],
 };
 
+identityRouter.get("/", protectDataCalls, getCurrUser);
 identityRouter.post("/create", inputValidators.signup,createNewUser);
 identityRouter.post("/establish", inputValidators.login, login);
 
