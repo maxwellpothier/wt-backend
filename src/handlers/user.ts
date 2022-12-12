@@ -7,6 +7,9 @@ export const createNewUser = async (req, res, next) => {
 			data: {
 				username: req.body.username,
 				password: await hashPassword(req.body.password),
+				firstName: req.body.firstName,
+				lastName: req.body.lastName,
+				email: req.body.email,
 			},
 		});
 	
