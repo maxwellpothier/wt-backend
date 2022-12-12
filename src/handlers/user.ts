@@ -49,3 +49,23 @@ export const getCurrUser = async (req, res) => {
 	res.status(200);
 	res.json({data: req.user});
 };
+
+export const getUserInfo = async (req, res, next) => {
+	try {
+		const user = await prisma.user.findUnique({
+			where: {
+				id: req.params.userid,
+			},
+			select: {
+				id: true,
+				username: true
+			}
+		});
+
+		res.status(200);
+		res.json({data: user});
+	} catch (err) {
+		err.message = "Error getting user info";
+		next(err);
+	}
+}
