@@ -122,7 +122,10 @@ export const getUserInfo = async (req, res, next) => {
 			select: {
 				posts: true,
 				id: true,
-				username: true
+				username: true,
+				firstName: true,
+				lastName: true,
+				email: true,
 			},
 		});
 
