@@ -19,6 +19,54 @@ export const createNewUser = async (req, res, next) => {
 	}
 };
 
+export const editUserInfo = async (req, res, next) => {
+	try {
+		const editedUser = await prisma.user.update({
+			where: {
+				id: req.user.id,
+			},
+			data: {
+				username: req.body.username,
+				firstName: req.body.firstName,
+				lastName: req.body.lastName,
+				email: req.body.email,
+			},
+		});
+
+		res.status(200);
+		res.json({data: editedUser});
+	} catch (err) {
+		err.message = "Error editing user info";
+		next(err);
+	}
+};
+
+export const deleteUser = async (req, res, next) => {
+	try {
+		await prisma.post.deleteMany({
+			where: {
+				belongsToId: req.user.id,
+			},
+		});
+	} catch (err) {
+		err.message = "Error deleting associated posts";
+		next(err);
+	}
+
+	try {
+		const deletedUser = await prisma.user.delete({
+			where: {
+				id: req.user.id,
+			},
+		});
+
+		res.json({data: deletedUser});
+	} catch (err) {
+		err.message = "Error deleting user";
+		next(err);
+	}
+};
+
 export const login = async (req, res) => {
 	const user = await prisma.user.findUnique({
 		where: {

@@ -14,9 +14,12 @@ model User {
     id        String   @id @default(uuid())
     createdAt DateTime @default(now())
 
-    username String @unique
-    password String
-    posts    Post[]
+    username  String @unique
+    password  String
+    firstName String
+    lastName  String
+    email     String
+    posts     Post[]
 }
 
 model Album {
