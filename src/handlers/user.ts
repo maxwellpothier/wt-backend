@@ -96,9 +96,18 @@ export const login = async (req, res) => {
 };
 
 export const getCurrUser = async (req, res) => {
-	// for now, this will only grab the username and id
-	res.status(200);
-	res.json({data: req.user});
+	const user = await prisma.user.findUnique({
+		where: {
+			id: req.user.id,
+		},
+		select: {
+			posts: true,
+			id: true,
+			username: true,
+		}
+	});
+
+	res.json({data: user});
 };
 
 export const getUserInfo = async (req, res, next) => {
