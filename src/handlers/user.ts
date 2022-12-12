@@ -57,9 +57,10 @@ export const getUserInfo = async (req, res, next) => {
 				id: req.params.userid,
 			},
 			select: {
+				posts: true,
 				id: true,
 				username: true
-			}
+			},
 		});
 
 		res.status(200);
