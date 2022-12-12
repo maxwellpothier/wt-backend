@@ -17,7 +17,7 @@ app.get("/", (req, res, next) => {
 	res.json({message: "Message from the api", secondMessage: req.middlewareMessage});
 });
 
-app.use("/api", protectDataCalls, router);
+app.use("/api", router);
 app.use("/identity", identityRouter);
 
 // Error handler

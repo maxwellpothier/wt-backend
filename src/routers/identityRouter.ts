@@ -20,7 +20,7 @@ const inputValidators = {
 
 identityRouter.get("/", protectDataCalls, getCurrUser);
 identityRouter.get("/:userid", getUserInfo);
-identityRouter.post("/create", inputValidators.signup,createNewUser);
+identityRouter.post("/create", inputValidators.signup, createNewUser);
 identityRouter.post("/establish", inputValidators.login, login);
 
 export default identityRouter;
