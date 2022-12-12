@@ -104,6 +104,9 @@ export const getCurrUser = async (req, res) => {
 			posts: true,
 			id: true,
 			username: true,
+			firstName: true,
+			lastName: true,
+			email: true,
 		}
 	});
 
