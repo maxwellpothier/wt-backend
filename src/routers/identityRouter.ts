@@ -14,6 +14,9 @@ const inputValidators = {
 	signup: [
 		body("username").isString(),
 		body("password").isString(),
+		body("firstName").isString(),
+		body("lastName").isString(),
+		body("email").isString(),
 		handleInputErrors
 	],
 	edit: [
