@@ -101,7 +101,11 @@ export const getCurrUser = async (req, res) => {
 			id: req.user.id,
 		},
 		select: {
-			posts: true,
+			posts: {
+				include: {
+					album: true,
+				},
+			},
 			id: true,
 			username: true,
 			firstName: true,
