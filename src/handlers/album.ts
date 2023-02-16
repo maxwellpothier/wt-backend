@@ -50,3 +50,24 @@ export const addAlbum = async (req, res, next) => {
 		next(err);
 	}
 };
+
+export const editAlbum = async (req, res, next) => {
+	try {
+		const album = await prisma.album.update({
+			where: {
+				id: req.params.id
+			},
+			data: {
+				title: req.body.title,
+				artist: req.body.artist,
+				yearReleased: req.body.yearReleased,
+				url: req.body.url,
+			}
+		});
+
+		res.json({data: album});
+	} catch(err) {
+		err.message = "Error editing album",
+		next(err);
+	}
+};

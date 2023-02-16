@@ -2,7 +2,7 @@ import {Router} from "express";
 import { createPost, deletePost, editPost, getAllPosts, getOnePost, getUserPosts } from "../handlers/post";
 import {body} from "express-validator";
 import { handleInputErrors, onlyAdmin, protectDataCalls } from "../utils/middlewareUtils";
-import { addAlbum, getAlbumById, getAlbums } from "../handlers/album";
+import { addAlbum, editAlbum, getAlbumById, getAlbums } from "../handlers/album";
 
 const router = Router();
 
@@ -43,5 +43,6 @@ router.delete("/posts/:userid/:id", protectDataCalls, deletePost);
 router.get("/albums", getAlbums);
 router.get("/albums/:id", getAlbumById);
 router.post("/albums", inputValidators.album, onlyAdmin, addAlbum);
+router.post("/albums/:id", onlyAdmin, editAlbum)
 
 export default router;
