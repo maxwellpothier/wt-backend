@@ -42,7 +42,7 @@ router.delete("/posts/:userid/:id", protectDataCalls, deletePost);
  */
 router.get("/albums", getAlbums);
 router.get("/albums/:id", getAlbumById);
-router.post("/albums", inputValidators.album, onlyAdmin, addAlbum);
-router.post("/albums/:id", onlyAdmin, editAlbum)
+router.post("/albums", inputValidators.album, protectDataCalls, onlyAdmin, addAlbum);
+router.post("/albums/:id", protectDataCalls, onlyAdmin, editAlbum)
 
 export default router;
