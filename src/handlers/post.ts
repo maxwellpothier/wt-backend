@@ -73,7 +73,7 @@ export const createPost = async (req, res, next) => {
 	
 		res.json({data: post});
 	} catch (err) {
-		err.message = `Error creating post}`;
+		err.message = "Error creating post";
 		next(err);
 	}
 };
